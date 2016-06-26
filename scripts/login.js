@@ -1,5 +1,5 @@
 $("#user_login_btn").click(()=>{
-	fetch('/api/login',{
+	fetch('/api/user/login',{
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
