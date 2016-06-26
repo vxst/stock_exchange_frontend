@@ -64,10 +64,13 @@ $(document).ready(
 									'active': ($(".whether_pause_exchange").val().indexOf("pause") == -1)
 								})
 							}).then(
-								if(response.status != 'ok'){
-									alert("设置交易活跃状态失败");
-								}else{
-									alert("设置成功");
+								(response_str)=>{
+									let response = response_str.json();
+									if(response.status != 'ok'){
+										alert("设置交易活跃状态失败");
+									}else{
+										alert("设置成功");
+									}
 								}
 							);
 						}
