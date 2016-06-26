@@ -1,0 +1,170 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="stock_account.css" rel="stylesheet" type="text/css">
+    <title>证券账户管理－管理界面</title>
+  </head><body>
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">主页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="stock_account.html">证券账户管理</a>
+            </li>
+            <li>
+              <a href="money_account.html">资金帐户管理</a>
+            </li>
+            <li>
+              <a href="exchange_system.html">交易系统管理</a>
+            </li>
+            <li>
+              <a href="#">登出</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center">证券账户管理</h1>
+            <p class="text-center">请在下方输入证券账户的相应信息</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center">新建／修改证券账户</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <form role="form">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="账户ID">
+                  <span class="input-group-btn">
+                    <a class="btn btn-success" type="submit">打开</a>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="username" class="control-label">用户名</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="username" placeholder="用户名">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="password" class="control-label">密码</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="password" placeholder="密码">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="sex" class="control-label">性别</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="sex" placeholder="性别">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="id_card" class="control-label">身份证</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="id_card" placeholder="身份证">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="address" class="control-label">家庭住址</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="address" placeholder="住址">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="work" class="control-label">职业</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="work" placeholder="职业">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="education" class="control-label">学历</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="education" placeholder="学历">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="work" class="control-label">工作单位</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="work" placeholder="工作单位">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="phone" class="control-label">联系电话</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="phone" placeholder="联系电话">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox">已确认用户身份</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="button" class="btn btn-default">提交</button>
+                  <button type="button" class="btn btn-danger">销户</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+</body></html>
