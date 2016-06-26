@@ -1,0 +1,27 @@
+{
+  "name": "stock_exchange",
+  "homepage": "https://github.com/vxst/stock_exchange_frontend",
+  "authors": [
+    "Shan Ting <vxst@vxst.org>"
+  ],
+  "description": "Stock exchange frontend",
+  "main": "index.html",
+  "keywords": [
+    "Stock",
+    "Exchange"
+  ],
+  "license": "Private",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1 - 2",
+    "bootstrap": "^3.3.6",
+    "fetch": "^1.0.0"
+  }
+}
