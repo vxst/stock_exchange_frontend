@@ -10,14 +10,14 @@ $("#user_login_btn").click(()=>{
 			'username': $("#username").val(),
 			'password': $("#password").val()
 		})
-	})
-}).then((response)=>{
-	var result = response.json();
-	if(result['status'] == 'ok'){
-		$(location).attr('href', '/trade/index.html');
-	}else{
-		alert("登录失败");
-	}
+	}).then((response)=>{
+		var result = response.json();
+		if(result['status'] == 'ok'){
+			$(location).attr('href', '/trade/index.html');
+		}else{
+			alert("登录失败");
+		}
+	});
 });
 $("#admin_login_btn").click(()=>{
 	fetch('/api/user/login',{
@@ -31,12 +31,12 @@ $("#admin_login_btn").click(()=>{
 			'username': $("#username").val(),
 			'password': $("#password").val()
 		})
-	})
-}).then((response)=>{
-	var result = response.json();
-	if(result['status'] == 'ok'){
-		$(location).attr('href', '/admin/index.html');
-	}else{
-		alert("登录失败");
-	}
+	}).then((response)=>{
+		var result = response.json();
+		if(result['status'] == 'ok'){
+			$(location).attr('href', '/admin/index.html');
+		}else{
+			alert("登录失败");
+		}
+	});
 });
