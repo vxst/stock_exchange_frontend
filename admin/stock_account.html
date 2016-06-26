@@ -4,6 +4,7 @@
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="../bower_components/fetch/fetch.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../scripts/admin_stock_account.js"></script>
     <link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="stock_account.css" rel="stylesheet" type="text/css">
     <title>证券账户管理－管理界面</title>
@@ -59,9 +60,9 @@
             <form role="form">
               <div class="form-group">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="账户ID">
+                  <input type="text" class="form-control" id="user_id" placeholder="账户ID">
                   <span class="input-group-btn">
-                    <a class="btn btn-success" type="submit">打开</a>
+                    <a class="btn btn-success" type="button" id="open_id">打开</a>
                   </span>
                 </div>
               </div>
@@ -85,6 +86,14 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-2">
+					<label for="name" class="control-label">姓名</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" placeholder="姓名">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
                   <label for="password" class="control-label">密码</label>
                 </div>
                 <div class="col-sm-10">
@@ -101,10 +110,10 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label for="id_card" class="control-label">身份证</label>
+                  <label for="national_id" class="control-label">身份证</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="id_card" placeholder="身份证">
+                  <input type="text" class="form-control" id="national_id" placeholder="身份证">
                 </div>
               </div>
               <div class="form-group">
@@ -151,14 +160,14 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox">已确认用户身份</label>
+                      <input class="checkbox" type="checkbox" value="verified">已确认用户身份</label>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="button" class="btn btn-default">提交</button>
-                  <button type="button" class="btn btn-danger">销户</button>
+                  <button type="button" class="btn btn-default" id="submit">提交</button>
+                  <button type="button" class="btn btn-danger"  id="delete">销户</button>
                 </div>
               </div>
             </form>
