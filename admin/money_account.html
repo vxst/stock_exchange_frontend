@@ -1,128 +1,130 @@
-<html><head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="money_account.css" rel="stylesheet" type="text/css">
-        <title>资金账户管理－管理界面</title>
-    </head><body>
-        <div class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../index.html">主页</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="stock_account.html">证券账户管理</a>
-                        </li>
-                        <li class="active">
-                            <a href="money_account.html">资金帐户管理</a>
-                        </li>
-                        <li>
-                            <a href="exchange_system.html">交易系统管理</a>
-                        </li>
-                        <li>
-                            <a href="#">登出</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="text-center">资金账户管理</h1>
-                        <p class="text-center">请在下方输入资金账户的相应信息</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="text-center">新建／修改资金账户</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <form role="form">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="账户ID">
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-success" type="submit">打开</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <label for="username" class="control-label">关联证券账户ID</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="username" placeholder="证券账户ID">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <label for="password" class="control-label">密码</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="password" placeholder="密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <label for="sex" class="control-label">资金数量</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="sex" placeholder="资金数量">
-                                </div>
-                            </div>
-                            
-                            
-                            
-                            
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <label for="work" class="control-label">存取资金</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="work" placeholder="存取资金量">
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="button" class="btn btn-default">提交</button>
-                                    <button type="button" class="btn btn-danger">销户</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../bower_components/fetch/fetch.js"></script>
+		<link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="money_account.css" rel="stylesheet" type="text/css">
+		<title>资金账户管理－管理界面</title>
+	</head><body>
+		<div class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">主页</a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-ex-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="stock_account.html">证券账户管理</a>
+						</li>
+						<li class="active">
+							<a href="money_account.html">资金帐户管理</a>
+						</li>
+						<li>
+							<a href="exchange_system.html">交易系统管理</a>
+						</li>
+						<li>
+							<a href="#">登出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="text-center">资金账户管理</h1>
+						<p class="text-center">请在下方输入资金账户的相应信息</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="text-center">新建／修改资金账户</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<form role="form">
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="账户ID">
+									<span class="input-group-btn">
+										<a class="btn btn-success" type="submit">打开</a>
+									</span>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<div class="col-sm-2">
+									<label for="username" class="control-label">关联证券账户ID</label>
+								</div>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="username" placeholder="证券账户ID">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2">
+									<label for="password" class="control-label">密码</label>
+								</div>
+								<div class="col-sm-10">
+									<input type="password" class="form-control" id="password" placeholder="密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2">
+									<label for="sex" class="control-label">资金数量</label>
+								</div>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="sex" placeholder="资金数量">
+								</div>
+							</div>
 
-</body></html>
+
+
+
+							<div class="form-group">
+								<div class="col-sm-2">
+									<label for="work" class="control-label">存取资金</label>
+								</div>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="work" placeholder="存取资金量">
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="button" class="btn btn-default">提交</button>
+									<button type="button" class="btn btn-danger">销户</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body></html>
