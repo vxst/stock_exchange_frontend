@@ -21,6 +21,7 @@ $(document).ready(
 					$("#address").val(data.address);
 					$("#education").val(data.education);
 					$("#work").val(data.work);
+					$("#work_place").val(data.work_place);
 					$("#phone").val(data.phone);
 				}
 			});
@@ -41,6 +42,7 @@ $(document).ready(
 							'address': $("#address").val(),
 							'education': $("#education").val(),
 							'work': $("#work").val(),
+							'work_place': $("#work_place").val(),
 							'phone': $("#phone").val()
 						})
 					}).then((response)=>{
