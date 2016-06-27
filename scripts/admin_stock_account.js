@@ -2,6 +2,18 @@
 
 $(document).ready(
 	()=>{
+		let clear_fields = ()=>{
+			$("#username").val("");
+			$("#name").val("");
+			$("#password").val("");
+			$("#sex").val("");
+			$("#national_id").val("");
+			$("#address").val("");
+			$("#education").val("");
+			$("#work").val("");
+			$("#phone").val("");
+			$("#verified").prop('checked', false);
+		}
 		$("#open_id").click(
 			()=>{
 				fetch(make_query_url('/api/stock_account',{'user_id': $("#user_id").val()}),{
@@ -17,16 +29,20 @@ $(document).ready(
 						alert("无法链接服务器");
 					}else{
 						let data = response.data;
-						$("#username").val(data.username);
-						$("#name").val(data.name);
-						$("#password").val('');
-						$("#sex").val(data.sex);
-						$("#national_id").val(data.national_id);
-						$("#address").val(data.address);
-						$("#education").val(data.education);
-						$("#work").val(data.work);
-						$("#phone").val(data.phone);
-						$(".checkbox").val([]);
+						if(data === undefined){
+							clear_fields();
+						}else{
+							$("#username").val(data.username);
+							$("#name").val(data.name);
+							$("#password").val('');
+							$("#sex").val(data.sex);
+							$("#national_id").val(data.national_id);
+							$("#address").val(data.address);
+							$("#education").val(data.education);
+							$("#work").val(data.work);
+							$("#phone").val(data.phone);
+							$("#verified").prop('checked', false);
+						}
 					}
 				});
 			}
@@ -63,9 +79,10 @@ $(document).ready(
 					}
 				).then(
 					(response)=>{
-						if(response.status == "ok")
+						if(response.status == "ok"){
 							alert("已完成");
-						else
+							clear_fields();
+						}else
 							alert("修改失败");
 					}
 				);
@@ -74,7 +91,7 @@ $(document).ready(
 
 		$("#delete").click(
 			()=>{
-				if($(".checkbox").val() != ["verified"]){
+				if(!$("#verified").prop('checked')){
 					alert("请先验证用户身份");
 					return;
 				}
@@ -94,9 +111,10 @@ $(document).ready(
 					}
 				).then(
 					(response)=>{
-						if(response.status == "ok")
+						if(response.status == "ok"){
 							alert("已完成");
-						else
+							clear_fields();
+						}else
 							alert("删除失败");
 					}
 				);
