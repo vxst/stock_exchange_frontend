@@ -5,6 +5,7 @@
 		<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../bower_components/fetch/fetch.js"></script>
+		<script type="text/javascript" src="../scripts/admin_money_account.js"></script>
 		<link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="money_account.css" rel="stylesheet" type="text/css">
 		<title>资金账户管理－管理界面</title>
@@ -60,9 +61,9 @@
 						<form role="form">
 							<div class="form-group">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="账户ID">
+									<input type="text" class="form-control" placeholder="账户ID" id="user_id">
 									<span class="input-group-btn">
-										<a class="btn btn-success" type="submit">打开</a>
+										<a class="btn btn-success" type="button" id="open_id">打开</a>
 									</span>
 								</div>
 							</div>
@@ -78,10 +79,10 @@
 						<form class="form-horizontal" role="form">
 							<div class="form-group">
 								<div class="col-sm-2">
-									<label for="username" class="control-label">关联证券账户ID</label>
+									<label for="stock_account_id" class="control-label">关联证券账户ID</label>
 								</div>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="username" placeholder="证券账户ID">
+									<input type="text" class="form-control" id="stock_account_id" placeholder="证券账户ID">
 								</div>
 							</div>
 							<div class="form-group">
@@ -94,30 +95,27 @@
 							</div>
 							<div class="form-group">
 								<div class="col-sm-2">
-									<label for="sex" class="control-label">资金数量</label>
+									<label for="money" class="control-label">资金数量</label>
 								</div>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="sex" placeholder="资金数量">
+									<input type="text" class="form-control" id="money" placeholder="资金数量">
 								</div>
 							</div>
 
-
-
-
 							<div class="form-group">
 								<div class="col-sm-2">
-									<label for="work" class="control-label">存取资金</label>
+									<label for="money_change" class="control-label">存取资金</label>
 								</div>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="work" placeholder="存取资金量">
+									<input type="text" class="form-control" id="money_change" placeholder="存取资金量">
 								</div>
 							</div>
 
 
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
-									<button type="button" class="btn btn-default">提交</button>
-									<button type="button" class="btn btn-danger">销户</button>
+									<button type="button" class="btn btn-default" id="submit">提交</button>
+									<button type="button" class="btn btn-danger" id="delete">销户</button>
 								</div>
 							</div>
 						</form>
