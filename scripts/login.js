@@ -11,9 +11,11 @@ $("#user_login_btn").click(()=>{
 			'password': $("#password").val()
 		})
 	}).then((response)=>{
-		var result = response.json();
+		return response.json();
+	}).then((result)=>{
+		console.log(result);
 		if(result['status'] == 'ok'){
-			$(location).attr('href', '/trade/index.html');
+			$(location).attr('href', '/user/index.html');
 		}else{
 			alert("登录失败");
 		}
@@ -32,7 +34,8 @@ $("#admin_login_btn").click(()=>{
 			'password': $("#password").val()
 		})
 	}).then((response)=>{
-		var result = response.json();
+		return response.json();
+	}).then((result)=>{
 		if(result['status'] == 'ok'){
 			$(location).attr('href', '/admin/index.html');
 		}else{
