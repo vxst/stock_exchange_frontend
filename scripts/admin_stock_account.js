@@ -34,7 +34,7 @@ $(document).ready(
 
 		$("#submit").click(
 			()=>{
-				if($(".checkbox").val() != ["verified"]){
+				if(!$("#verified").prop('checked')){
 					alert("请先验证用户身份");
 					return;
 				}

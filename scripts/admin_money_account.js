@@ -28,6 +28,12 @@ $(document).ready(
 
 		$("#submit").click(
 			()=>{
+				let money = parseFloat($("#money").val());
+				let money_change = parseFloat($("#money_change").val());
+				let money_result = money;
+				if(!isNaN(money_change)){
+					money_result = money + money_change;
+				}
 				fetch('/api/money_account',{
 					method: 'POST',
 					credentials: 'same-origin',
@@ -39,8 +45,7 @@ $(document).ready(
 						'user_id': $("#user_id").val(),
 						'stock_account_id': $("#stock_account_id").val(),
 						'password': $("#password").val(),
-						'money':
-							parseFloat($("#money").val()) + parseFloat($("#money_change").val())
+						'money': money_result
 					})
 				}).then(
 					(response)=>{

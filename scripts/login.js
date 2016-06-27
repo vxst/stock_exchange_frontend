@@ -37,7 +37,10 @@ $("#admin_login_btn").click(()=>{
 		return response.json();
 	}).then((result)=>{
 		if(result['status'] == 'ok'){
-			$(location).attr('href', '/admin/index.html');
+			if(result.data.is_admin)
+				$(location).attr('href', '/admin/index.html');
+			else
+				alert("不是管理员");
 		}else{
 			alert("登录失败");
 		}

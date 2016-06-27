@@ -2,14 +2,14 @@
 
 $(document).ready(
 	()=>{
-		let init = ()=>{
-			fetch(make_query_url('/api/stock_account'),{
+		function init(){
+			fetch('/api/stock_account',{
 				method: 'GET',
 				credentials: 'same-origin',
 				headers: {
 					'Accept': 'application/json',
 				},
-			}).then(response)=>{
+			}).then((response)=>{
 				return response.json();
 			}).then((response)=>{
 				if(response.status != "ok"){
