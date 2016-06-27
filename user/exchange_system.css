@@ -6776,3 +6776,15 @@ body {
   background-attachment: fixed;
 }
 /* PINGENDO COMMENT DO NOT REMOVE */
+
+.slim{
+	height: 24px;
+	font-size: 0.75em;
+	padding: 4px 10px;
+}
+.buy_in_style{
+	color: green;
+}
+.sell_out_style{
+	color: red;
+}

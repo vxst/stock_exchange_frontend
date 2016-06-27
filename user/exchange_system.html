@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../bower_components/fetch/fetch.js"></script>
+	<script type="text/javascript" src="../scripts/user_exchange_system.js"></script>
     <link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="exchange_system.css" rel="stylesheet" type="text/css">
     <title>用户信息－证券系统</title>
@@ -52,7 +54,7 @@
         <div class="row">
           <div class="col-md-4">
             <h1>账户信息</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+            <p id="user_info">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
           </div>
@@ -68,7 +70,7 @@
                 </div>
               </div>
             </form>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+            <p id="stock_info">Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
           </div>
@@ -114,7 +116,7 @@
         <div class="row">
           <div class="col-md-12">
             <h1>持有股票</h1>
-            <ul class="list-group">
+            <ul class="list-group" id="stock_holding">
               <li class="list-group-item">Cras justo odio</li>
               <li class="list-group-item">Dapibus ac facilisis in</li>
               <li class="list-group-item">Morbi leo risus</li>
@@ -134,12 +136,12 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <ul class="list-group">
+            <ul class="list-group" id="active_orders">
               <li class="list-group-item">Cras justo odio</li>
               <li class="list-group-item">Dapibus ac facilisis in</li>
               <li class="list-group-item">Morbi leo risus</li>
               <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at <span class="red">eros</span><button type="button" class="btn btn-danger pull-right slim">取消</button></li>
             </ul>
           </div>
         </div>
