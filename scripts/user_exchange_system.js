@@ -129,6 +129,129 @@ $(document).ready(
 						}
 					)
 				});
+				$("#searchbox").change(
+					()=>{
+						let keyword = $(this).val();
+						if(stock_is_code(keyword){
+							$("#searchbox").autocomplete({
+								'source': []
+							});
+							fetch(make_query_url("/api/stock_info", {
+								'stock_id':stock_from_code(keyword)
+							}),{
+								method: 'GET',
+								credentials: 'same-origin',
+								headers: {
+									'Accept': 'application/json'
+								}
+							}).then(res_json).then(
+								(response)=>{
+									$("#stock_info").html(
+										"股票代码："+stock_to_code(response.data.id)+
+										"股票名称："+response.data.name+
+										"最高买价："+(response.data.base_price * (response.data.max_change + 1.0))+
+										"最低卖价："+(response.data.base_price * (-response.data.max_change + 1.0))
+									);
+									sessionStorage.setItem("stock_id", response.data.id);
+									sessionStorage.setItem("base_price", response.data.base_price);
+									sessionStorage.setItem("max_change", response.data.max_change);
+								}
+							);
+						}else{
+							fetch(make_query_url("/api/stock_search", {'keyword':keyword}),{
+								method: 'GET',
+								credentials: 'same-origin',
+								headers: {
+									'Accept': 'application/json'
+								}
+							}).then(res_json).then(
+								(response)=>{
+									if(response.status == 'ok'){
+										let searchlist = [];
+										response.data.forEach(
+											(listitem)=>{
+												searchlist.append(
+													stock_to_code(listitem.id)+
+													' '+
+													listitem.name
+												);
+											}
+										);
+										$("#searchbox").autocomplete({
+											'source': searchlist
+										});
+									}
+								}
+							);
+						}
+					}
+				);
+				$("submit_order").click(
+					()=>{
+						let order_type = $(this).data("type") == 'buy';
+						let price = parseFloat($("#price").val());
+						let amount = parseInt($("#amount").val());
+						let stock_id = parseInt(sessionStorage.getItem("stock_id"));
+						let base_price = parseFloat(sessionStorage.getItem("base_price"));
+						let max_change = parseFloat(sessionStorage.getItem("max_change"));
+						let max_price  = base_price * (1.0+max_change);
+						let min_price  = base_price * (1.0-max_change);
+						let password   = $("#password").val();
+
+						if(!(price <= max_change && price >= min_price)){
+							alert("价格超过允许范围");
+							return;
+						}
+
+						async.waterfall([
+						(callback)=>{
+							fetch('/api/money_account_password_check',{
+								method: 'POST',
+								credentials: 'same-origin',
+								headers: {
+									'Accept': 'application/json',
+									'Content-Type': 'application/json'
+								},
+								body: JSON.stringify({
+									'password': password
+								})
+							}).then(res_json).then(
+								(response)=>{
+									if(response.status != 'ok'){
+										callback("密码错误");
+									}else{
+										callback(null);
+									}
+								}
+							);
+						},
+						(callback)=>{
+							fetch('/api/order_new', {
+								method: 'POST',
+								credentials: 'same-origin',
+								headers: {
+									'Accept': 'application/json',
+									'Content-Type': 'application/json'
+								},
+								body: JSON.stringify({
+									'stock_id': stock_id,
+									'direction': order_type,
+									'price': price,
+									'amount': amount
+								})
+							}).then(res_json).then(
+								(response)=>{
+									if(response.status == 'ok'){
+										alert("添加成功");
+									}else{
+										alert("添加失败");
+									}
+								}
+							);
+						}
+						]);
+					}
+				);
 			}
 
 			init();
