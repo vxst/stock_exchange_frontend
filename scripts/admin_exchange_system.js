@@ -88,7 +88,7 @@ $(document).ready(
 						'Accept': 'application/json',
 					},
 				}).then((response)=>{
-					let response_object = response.json();
+					let response_object = response.json().data;
 					let whether_pause_exchange = [];
 					if(!response_object.active)
 						whether_pause_exchange = ['pause']

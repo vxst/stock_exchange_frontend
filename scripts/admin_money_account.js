@@ -10,7 +10,8 @@ $(document).ready(
 					headers: {
 						'Accept': 'application/json',
 					},
-				}).then((response)=>{
+				}).then((response_str)=>{
+					let response = response_str.json();
 					if(response.status != "ok"){
 						alert("无法链接服务器");
 					}else{

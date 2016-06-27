@@ -10,7 +10,8 @@ $(document).ready(
 					headers: {
 						'Accept': 'application/json',
 					},
-				}).then((response)=>{
+				}).then((response_str)=>{
+					let response = response_str.json();
 					if(response.status != "ok"){
 						alert("无法链接服务器");
 					}else{
@@ -56,7 +57,8 @@ $(document).ready(
 						'phone': $("#phone").val()
 					})
 				}).then(
-					(response)=>{
+					(response_str)=>{
+						let response = response_str.json();
 						if(response.status == "ok")
 							alert("已完成");
 						else
@@ -83,7 +85,8 @@ $(document).ready(
 						'user_id': $("#user_id").val(),
 					})
 				}).then(
-					(response)=>{
+					(response_str)=>{
+						let response = response_str.json();
 						if(response.status == "ok")
 							alert("已完成");
 						else

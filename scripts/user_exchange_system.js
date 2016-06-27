@@ -28,7 +28,7 @@ $(document).ready(
 						string = string + '类型：'
 							+ '<span class="sell_out_style">卖出</span>';
 					string = string +
-						'<button type="button" class="btn btn-danger pull-right slim" '
+						'<button type="button" class="btn btn-danger pull-right slim cancelbtn" '
 						+'data-id="'+item_value.id+'">'+
 						+'取消'+
 						+'</button>';
@@ -39,9 +39,10 @@ $(document).ready(
 						(callback)=>{
 							fetch('/api/stock_account', get_param).then(
 									(response)=>{
-										username = response.json().username;
-										user_id = response.json().id;
-										name = response.json().name;
+										let data = response.json().data;
+										username = data.username;
+										user_id = data.id;
+										name = data.name;
 										callback(null);
 									}
 								);
@@ -49,7 +50,8 @@ $(document).ready(
 						(callback)=>{
 							fetch('/api/money_account', get_param).then(
 									(response)=>{
-										money = response.json().money;
+										let data = response.json().data;
+										money = data.money;
 										callback(null);
 									}
 								);
@@ -57,7 +59,7 @@ $(document).ready(
 						(callback)=>{
 							fetch('/api/orders', get_param).then(
 									(response)=>{
-										active_orders = response.json();
+										active_orders = response.json().data;
 										callback(null);
 									}
 								);
@@ -65,7 +67,7 @@ $(document).ready(
 						(callback)=>{
 							fetch('/api/stock', get_param).then(
 									(response)=>{
-										hold_stocks = response.json();
+										hold_stocks = response.json().data;
 										callback(null);
 									}
 								);
@@ -89,12 +91,38 @@ $(document).ready(
 								'</li>');
 						}
 					);
-					#("#active_orders").val("");
+					$("#active_orders").val("");
 					active_orders.forEach(
 						(element, index, array)=>{
 							$("#stock_holding").append(compose_li_item_active_order(element));
 						}
 					);
+					$(".cancelbtn").click(
+						()=>{
+							let order_id = $(this).data("id");
+							fetch('/api/order',{
+								method: 'DELETE',
+								credentials: 'same-origin',
+								headers: {
+									'Accept': 'application/json',
+									'Content-Type': 'application/json'
+								},
+								body: JSON.stringify({
+									'order_id': order_id
+								})
+							}).then(
+								(response)=>{
+									if(response.status == 'ok'){
+										alert("取消完成");
+										init();
+									}else{
+										alert("取消失败");
+										init();
+									}
+								}
+							);
+						}
+					)
 				});
 			}
 

@@ -1,6 +1,6 @@
 "use strict";
 
-to_query_string = (object)=>{
+function to_query_string(object){
 	let strings = [];
 	for(let single_item in object)
 		if (object.hasOwnProperty(single_item)) {
@@ -9,6 +9,6 @@ to_query_string = (object)=>{
 	return strings.join("&");
 }
 
-make_query_url = (base_url, query_object)=>{
+function make_query_url(base_url, query_object){
 	return base_url + "?" + to_query_string(query_object);
 }
