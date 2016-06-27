@@ -53,6 +53,7 @@ $(document).ready(
 						(callback)=>{
 							fetch('/api/money_account', get_param).then(res_json).then(
 									(response)=>{
+										console.log(response);
 										let data = response.data;
 										money = data.money;
 										callback(null);
@@ -77,15 +78,16 @@ $(document).ready(
 						}
 				],
 				(error, results)=>{
-					$("#user_info").val(
+					console.log("Load finished");
+					$("#user_info").html(
 						"用户ID："+user_id+"<br>"+
 						"用户名："+username+"<br>"+
 						"姓名："+name+"<br>"+
 						"资金数量："+money);
-					$("#stock_info").val(
+					$("#stock_info").html(
 						"请选择需要操作的股票"
 					);
-					$("#stock_holding").val("");
+					$("#stock_holding").html("");
 					hold_stocks.forEach(
 						(element, index, array)=>{
 							$("#stock_holding").append(
@@ -94,7 +96,7 @@ $(document).ready(
 								'</li>');
 						}
 					);
-					$("#active_orders").val("");
+					$("#active_orders").html("");
 					active_orders.forEach(
 						(element, index, array)=>{
 							$("#stock_holding").append(compose_li_item_active_order(element));
@@ -130,6 +132,6 @@ $(document).ready(
 			}
 
 			init();
-			setInterval(init, 3000);
+			setInterval(init, 500);
 		}
 );
