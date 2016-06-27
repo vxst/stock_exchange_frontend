@@ -9,8 +9,9 @@ $("#logout").click(()=>{
 		body: JSON.stringify({
 		})
 	}).then((response)=>{
-		var result = response.json();
-		if(result['status'] == 'ok'){
+		return response.json();
+	}).then((response)=>{
+		if(response['status'] == 'ok'){
 			$(location).attr('href', '../index.html');
 		}else{
 			alert("登出失败");

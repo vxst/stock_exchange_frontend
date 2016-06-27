@@ -17,6 +17,10 @@ $(document).ready(
 					})
 				}).then(
 					(response)=>{
+						return response.json();
+					}
+				).then(
+					(response)=>{
 						if(response.status == "ok")
 							alert("已完成");
 						else
@@ -49,6 +53,10 @@ $(document).ready(
 					})
 				}).then(
 					(response)=>{
+						return response.json();
+					}
+				).then(
+					(response)=>{
 						if(response.status != 'ok'){
 							alert("设置涨跌停失败");
 						}else{
@@ -64,8 +72,11 @@ $(document).ready(
 									'active': ($(".whether_pause_exchange").val().indexOf("pause") == -1)
 								})
 							}).then(
-								(response_str)=>{
-									let response = response_str.json();
+								(response)=>{
+									return response.json();
+								}
+							).then(
+								(response)=>{
 									if(response.status != 'ok'){
 										alert("设置交易活跃状态失败");
 									}else{
@@ -88,11 +99,12 @@ $(document).ready(
 						'Accept': 'application/json',
 					},
 				}).then((response)=>{
-					let response_object = response.json().data;
+					return response.json();
+				}).then((response)=>{
 					let whether_pause_exchange = [];
-					if(!response_object.active)
+					if(!response.active)
 						whether_pause_exchange = ['pause']
-					$("#max_change").val(response_object.max_change);
+					$("#max_change").val(response.max_change);
 					$(".whether_pause_exchange").val(whether_pause_exchange);
 				});
 			}

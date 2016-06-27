@@ -9,8 +9,9 @@ $(document).ready(
 				headers: {
 					'Accept': 'application/json',
 				},
-			}).then((response_str)=>{
-				let response = response_str.json();
+			}).then(response)=>{
+				return response.json();
+			}).then((response)=>{
 				if(response.status != "ok"){
 					alert("无法链接服务器");
 				}else{
@@ -42,9 +43,10 @@ $(document).ready(
 							'work': $("#work").val(),
 							'phone': $("#phone").val()
 						})
+					}).then((response)=>{
+						return response.json();
 					}).then(
-						(response_str)=>{
-							let response = response_str.json();
+						(response)=>{
 							if(response.status == "ok")
 								alert("已完成");
 							else

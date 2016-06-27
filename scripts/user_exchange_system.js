@@ -8,6 +8,9 @@ $(document).ready(
 			let name = "";
 			let active_orders = [];
 			let hold_stocks = [];
+			let res_json = (response)=>{
+				return response.json();
+			}
 			let init = ()=>{
 				let get_param = {
 					method: 'GET',
@@ -37,9 +40,9 @@ $(document).ready(
 
 				async.parallel([
 						(callback)=>{
-							fetch('/api/stock_account', get_param).then(
+							fetch('/api/stock_account', get_param).then(res_json).then(
 									(response)=>{
-										let data = response.json().data;
+										let data = response.data;
 										username = data.username;
 										user_id = data.id;
 										name = data.name;
@@ -48,26 +51,26 @@ $(document).ready(
 								);
 						},
 						(callback)=>{
-							fetch('/api/money_account', get_param).then(
+							fetch('/api/money_account', get_param).then(res_json).then(
 									(response)=>{
-										let data = response.json().data;
+										let data = response.data;
 										money = data.money;
 										callback(null);
 									}
 								);
 						},
 						(callback)=>{
-							fetch('/api/orders', get_param).then(
+							fetch('/api/orders', get_param).then(res_json).then(
 									(response)=>{
-										active_orders = response.json().data;
+										active_orders = response.data;
 										callback(null);
 									}
 								);
 						},
 						(callback)=>{
-							fetch('/api/stock', get_param).then(
+							fetch('/api/stock', get_param).then(res_json).then(
 									(response)=>{
-										hold_stocks = response.json().data;
+										hold_stocks = response.data;
 										callback(null);
 									}
 								);
@@ -110,7 +113,7 @@ $(document).ready(
 								body: JSON.stringify({
 									'order_id': order_id
 								})
-							}).then(
+							}).then(res_json).then(
 								(response)=>{
 									if(response.status == 'ok'){
 										alert("取消完成");
