@@ -132,7 +132,7 @@ $(document).ready(
 				$("#searchbox").change(
 					()=>{
 						let keyword = $(this).val();
-						if(stock_is_code(keyword){
+						if(stock_is_code(keyword)){
 							$("#searchbox").autocomplete({
 								'source': []
 							});
