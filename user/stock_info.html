@@ -4,6 +4,10 @@
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../bower_components/fetch/fetch.js"></script>
+        <script type="text/javascript" src="../bower_components/async/dist/async.min.js"></script>
+        <script type="text/javascript" src="../scripts/transfer_history.js"></script>
+        <script type="text/javascript" src="../scripts/query.js"></script>
+        <script type="text/javascript" src="../scripts/stock_code.js"></script>
         <script type="text/javascript" src="../scripts/plotly.min.js"></script>
         <script type="text/javascript" src="../scripts/plotlyjs-finance.js"></script>
         <script type="text/javascript" src="../scripts/user_stock_info.js"></script>
@@ -55,12 +59,11 @@
 				<div class="row">
 					<div class="col-md-8">
 						<h1>K线图</h1>
-						<div class="col-md-12" style="width: 600px; height: 500px; background-color=black" id="klinegraph"></div>
+						<div class="col-md-12" style="width: 700px; height: 600px; background-color=black" id="klinegraph"></div>
 					</div>
 					<div class="col-md-4">
 						<h1>买卖深度</h1>
 						<ul class="list-group" id="depth_list">
-							<li class="list-group-item">Cras justo odio</li><li class="list-group-item">Dapibus ac facilisis in</li><li class="list-group-item">Morbi leo risus</li><li class="list-group-item">Porta ac consectetur ac</li><li class="list-group-item">Vestibulum at eros</li>
 						</ul>
 					</div>
 				</div>

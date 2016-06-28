@@ -13,7 +13,7 @@ $(document).ready(
 				return response.json();
 			}).then((response)=>{
 				if(response.status != "ok"){
-					alert("无法链接服务器");
+					alert("请先登录");
 				}else{
 					let data = response.data;
 					$("#sex").val(data.sex);
@@ -55,6 +55,30 @@ $(document).ready(
 								alert("升级失败");
 						}
 					);
+
+					if($("#old_password").val() != "" && $("#new_password").val() != ""){
+						fetch("/api/user/password_change",{
+							method: 'POST',
+							credentials: 'same-origin',
+							headers: {
+								'Accept': 'application/json',
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								'old_password': $("#old_password").val(),
+								'new_password': $("#new_password").val()
+							})
+						}).then((response)=>{
+							return response.json();
+						}).then(
+							(response)=>{
+								if(response.status == "ok")
+									alert("已修改密码");
+								else
+									alert("修改密码失败");
+							}
+						);
+					}
 				}
 		);
 
