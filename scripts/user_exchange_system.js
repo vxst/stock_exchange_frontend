@@ -149,8 +149,13 @@ $(document).ready(()=>{
 					(element, index, array)=>{
 						if(element.amount > 0){
 							$("#stock_holding").append(
-								'<li class="list-group-item">'+stock_to_code(element.stock_id)+" "+
-								element.stock_name + ' 数量:'+element.amount+
+								'<li class="list-group-item">' +
+								stock_to_code(element.stock_id)+" "+ element.stock_name +
+								' 数量:' + element.amount +
+								' 买入价格:' + element.buyin_price + 
+								' 成本' + element.amount * element.buyin_price +
+								' 现价:' + element.current_price + 
+								' 损益:' + (element.current_price - element.buyin_price) * element.amount +
 								'</li>');
 						}
 					}
