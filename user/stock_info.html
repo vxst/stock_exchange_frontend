@@ -4,6 +4,9 @@
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../bower_components/fetch/fetch.js"></script>
+        <script type="text/javascript" src="../scripts/plotly.min.js"></script>
+        <script type="text/javascript" src="../scripts/plotlyjs-finance.js"></script>
+        <script type="text/javascript" src="../scripts/user_stock_info.js"></script>
         <link href="../font_awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="stock_info.css" rel="stylesheet" type="text/css">
         <title>股票信息-证券界面</title>
@@ -37,6 +40,31 @@
                 </div>
             </div>
         </div>
-        <div class="section"> <div class="container"> <div class="row"> <div class="col-md-12"> <h1 class="text-center">股票信息</h1> </div></div><div class="row"> <div class="col-md-offset-3 col-md-6"> <form role="form"> <div class="form-group"> <div class="input-group"> <input type="text" class="form-control" placeholder="搜索股票"> <span class="input-group-btn"> <a class="btn btn-success" type="submit">搜索</a> </span> </div></div></form> </div></div></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-8"><h1>K线图</h1></div><div class="col-md-4"><h1>买卖深度</h1><ul class="list-group"><li class="list-group-item">Cras justo odio</li><li class="list-group-item">Dapibus ac facilisis in</li><li class="list-group-item">Morbi leo risus</li><li class="list-group-item">Porta ac consectetur ac</li><li class="list-group-item">Vestibulum at eros</li></ul></div></div></div></div>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12"> <h1 class="text-center">股票信息</h1> </div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6"> <form role="form"> <div class="form-group"> <div class="input-group"> <input type="text" class="form-control" placeholder="搜索股票" id="searchbox"> <span class="input-group-btn"> <a class="btn btn-success" type="button" id="search">搜索</a> </span> </div></div></form> </div>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<h1>K线图</h1>
+						<div class="col-md-12" style="width: 600px; height: 500px; background-color=black" id="klinegraph"></div>
+					</div>
+					<div class="col-md-4">
+						<h1>买卖深度</h1>
+						<ul class="list-group" id="depth_list">
+							<li class="list-group-item">Cras justo odio</li><li class="list-group-item">Dapibus ac facilisis in</li><li class="list-group-item">Morbi leo risus</li><li class="list-group-item">Porta ac consectetur ac</li><li class="list-group-item">Vestibulum at eros</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript" src="../scripts/logout.js"></script>
 </body></html>
