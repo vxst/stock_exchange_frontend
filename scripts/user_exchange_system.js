@@ -147,10 +147,12 @@ $(document).ready(()=>{
 			$("#stock_holding").html("");
 			hold_stocks.forEach(
 					(element, index, array)=>{
-						$("#stock_holding").append(
-								'<li class="list-group-item">'+
+						if(element.amount > 0){
+							$("#stock_holding").append(
+								'<li class="list-group-item">'+stock_to_code(element.stock_id)+" "+
 								element.stock_name + ' 数量:'+element.amount+
 								'</li>');
+						}
 					}
 					);
 			$("#active_orders").html("");
@@ -253,6 +255,5 @@ $(document).ready(()=>{
 	});
 
 	init();
-	setInterval(init, 500);
-}
-);
+	setInterval(init, 1000);
+});
