@@ -48,6 +48,7 @@ $(document).ready(
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({
+						'name': $("#stock_name").val(),
 						'stock_id': $("#stock_id").val(),
 						'max_change': $("#max_change").val()
 					})
@@ -69,7 +70,7 @@ $(document).ready(
 								},
 								body: JSON.stringify({
 									'stock_id': $("#stock_id").val(),
-									'active': ($(".whether_pause_exchange").val().indexOf("pause") == -1)
+									'active': (!$("#pause_exchange").prop("checked"))
 								})
 							}).then(
 								(response)=>{
@@ -101,11 +102,12 @@ $(document).ready(
 				}).then((response)=>{
 					return response.json();
 				}).then((response)=>{
-					let whether_pause_exchange = [];
-					if(!response.active)
-						whether_pause_exchange = ['pause']
-					$("#max_change").val(response.max_change);
-					$(".whether_pause_exchange").val(whether_pause_exchange);
+					let stock_name = response.data.name;
+					let max_change = response.data.max_change;
+					let active  = response.data.active;
+					$("#stock_name").val(stock_name);
+					$("#max_change").val(max_change);
+					$("#pause_exchange").prop('checked', !active);
 				});
 			}
 		);

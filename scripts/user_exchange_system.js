@@ -8,8 +8,71 @@ $(document).ready(
 			let name = "";
 			let active_orders = [];
 			let hold_stocks = [];
+			let old_keyword = "";
 			let res_json = (response)=>{
 				return response.json();
+			}
+			let update_search=()=>{
+				let keyword = $("#searchbox").val();
+				console.log("Changed to "+ keyword);
+				if(stock_is_code(keyword)){
+					$("#searchbox").autocomplete({
+						'source': []
+					});
+					fetch(make_query_url("/api/stock_info", {
+						'stock_id':stock_from_code(keyword)
+					}),{
+						method: 'GET',
+						credentials: 'same-origin',
+						headers: {
+							'Accept': 'application/json'
+						}
+					}).then(res_json).then(
+						(response)=>{
+							$("#stock_info").html(
+								"股票代码："+stock_to_code(response.data.id)+"<br>"+
+								"股票名称："+response.data.name+"<br>"+
+								"最高买价："+(response.data.base_price * (response.data.max_change + 1.0))+"<br>"+
+								"最低卖价："+(response.data.base_price * (-response.data.max_change + 1.0))
+							);
+							sessionStorage.setItem("stock_id", response.data.id);
+							sessionStorage.setItem("base_price", response.data.base_price);
+							sessionStorage.setItem("max_change", response.data.max_change);
+						}
+					);
+				}else{
+					$("#stock_info").html(
+						"请选择需要操作的股票"
+					);
+					if(old_keyword != keyword){
+						old_keyword = keyword;
+						fetch(make_query_url("/api/stock_search", {'keyword':keyword}),{
+							method: 'GET',
+							credentials: 'same-origin',
+							headers: {
+								'Accept': 'application/json'
+							}
+						}).then(res_json).then(
+							(response)=>{
+								if(response.status == 'ok'){
+									let searchlist = [];
+									response.data.forEach(
+										(listitem)=>{
+											searchlist.append(
+												stock_to_code(listitem.id)+
+												' '+
+												listitem.name
+											);
+										}
+									);
+									$("#searchbox").autocomplete({
+										'source': searchlist
+									});
+								}
+							}
+						);
+					}
+				}
 			}
 			let init = ()=>{
 				let get_param = {
@@ -24,6 +87,7 @@ $(document).ready(
 					let string = '<li class="list-group-item">';
 					string = string + item_value.stock_name + ' ';
 					string = string + '数量：' + item_value.amount + ' ';
+					string = string + '价格：' + item_value.price  + ' ';
 					if(item_value.direction)
 						string = string + '类型：'
 							+ '<span class="buy_in_style">买入</span>';
@@ -31,11 +95,12 @@ $(document).ready(
 						string = string + '类型：'
 							+ '<span class="sell_out_style">卖出</span>';
 					string = string +
-						'<button type="button" class="btn btn-danger pull-right slim cancelbtn" '
-						+'data-id="'+item_value.id+'">'+
-						+'取消'+
-						+'</button>';
+						'<a type="button" class="btn btn-danger pull-right slim cancelbtn" '
+						+'data-id="'+item_value.id+'">'
+						+"取消"
+						+'</a>';
 					string = string + '</li>';
+					return string;
 				}
 
 				async.parallel([
@@ -84,9 +149,6 @@ $(document).ready(
 						"用户名："+username+"<br>"+
 						"姓名："+name+"<br>"+
 						"资金数量："+money);
-					$("#stock_info").html(
-						"请选择需要操作的股票"
-					);
 					$("#stock_holding").html("");
 					hold_stocks.forEach(
 						(element, index, array)=>{
@@ -99,12 +161,12 @@ $(document).ready(
 					$("#active_orders").html("");
 					active_orders.forEach(
 						(element, index, array)=>{
-							$("#stock_holding").append(compose_li_item_active_order(element));
+							$("#active_orders").append($(compose_li_item_active_order(element)));
 						}
 					);
 					$(".cancelbtn").click(
-						()=>{
-							let order_id = $(this).data("id");
+						(event)=>{
+							let order_id = $(event.target).data("id");
 							fetch('/api/order',{
 								method: 'DELETE',
 								credentials: 'same-origin',
@@ -127,68 +189,13 @@ $(document).ready(
 								}
 							);
 						}
-					)
+					);
+					update_search();
 				});
-				$("#searchbox").change(
-					()=>{
-						let keyword = $(this).val();
-						if(stock_is_code(keyword)){
-							$("#searchbox").autocomplete({
-								'source': []
-							});
-							fetch(make_query_url("/api/stock_info", {
-								'stock_id':stock_from_code(keyword)
-							}),{
-								method: 'GET',
-								credentials: 'same-origin',
-								headers: {
-									'Accept': 'application/json'
-								}
-							}).then(res_json).then(
-								(response)=>{
-									$("#stock_info").html(
-										"股票代码："+stock_to_code(response.data.id)+
-										"股票名称："+response.data.name+
-										"最高买价："+(response.data.base_price * (response.data.max_change + 1.0))+
-										"最低卖价："+(response.data.base_price * (-response.data.max_change + 1.0))
-									);
-									sessionStorage.setItem("stock_id", response.data.id);
-									sessionStorage.setItem("base_price", response.data.base_price);
-									sessionStorage.setItem("max_change", response.data.max_change);
-								}
-							);
-						}else{
-							fetch(make_query_url("/api/stock_search", {'keyword':keyword}),{
-								method: 'GET',
-								credentials: 'same-origin',
-								headers: {
-									'Accept': 'application/json'
-								}
-							}).then(res_json).then(
-								(response)=>{
-									if(response.status == 'ok'){
-										let searchlist = [];
-										response.data.forEach(
-											(listitem)=>{
-												searchlist.append(
-													stock_to_code(listitem.id)+
-													' '+
-													listitem.name
-												);
-											}
-										);
-										$("#searchbox").autocomplete({
-											'source': searchlist
-										});
-									}
-								}
-							);
-						}
-					}
-				);
-				$("submit_order").click(
-					()=>{
-						let order_type = $(this).data("type") == 'buy';
+				$("#searchbox").on('input',update_search);
+				$(".submit_order").click(
+					(event)=>{
+						let order_type = $(event.target).data("type") == 'buy';
 						let price = parseFloat($("#price").val());
 						let amount = parseInt($("#amount").val());
 						let stock_id = parseInt(sessionStorage.getItem("stock_id"));
@@ -198,7 +205,7 @@ $(document).ready(
 						let min_price  = base_price * (1.0-max_change);
 						let password   = $("#password").val();
 
-						if(!(price <= max_change && price >= min_price)){
+						if(!(price <= max_price && price >= min_price)){
 							alert("价格超过允许范围");
 							return;
 						}
@@ -249,12 +256,16 @@ $(document).ready(
 								}
 							);
 						}
-						]);
+						],
+						(error)=>{
+							if(error)
+								alert(error);
+						});
 					}
 				);
 			}
 
 			init();
-			setInterval(init, 500);
+//			setInterval(init, 500);
 		}
 );
