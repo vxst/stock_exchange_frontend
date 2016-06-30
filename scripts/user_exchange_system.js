@@ -27,11 +27,16 @@ $(document).ready(()=>{
 					'Accept': 'application/json'
 				}
 			}).then(res_json).then((response)=>{
+				let add_str = "";
+				if(response.data.active == false){
+					add_str = "<br><span class='stop_exchange'>暂停交易</span>";
+				}
 				$("#stock_info").html(
 						"股票代码："+stock_to_code(response.data.id)+"<br>"+
 						"股票名称："+response.data.name+"<br>"+
-						"最高买价："+(response.data.base_price * (response.data.max_change + 1.0))+"<br>"+
-						"最低卖价："+(response.data.base_price * (-response.data.max_change + 1.0))
+						"最高买价："+((response.data.base_price * (response.data.max_change + 1.0))).toFixed(4)+"<br>"+
+						"最低卖价："+((response.data.base_price * (-response.data.max_change + 1.0))).toFixed(4)+
+						add_str
 						);
 				sessionStorage.setItem("stock_id", response.data.id);
 				sessionStorage.setItem("base_price", response.data.base_price);
@@ -82,7 +87,7 @@ $(document).ready(()=>{
 			let string = '<li class="list-group-item">';
 			string = string + item_value.stock_name + ' ';
 			string = string + '数量：' + item_value.amount + ' ';
-			string = string + '价格：' + item_value.price  + ' ';
+			string = string + '价格：' + item_value.price.toFixed(4)  + ' ';
 			if(item_value.direction)
 				string = string + '类型：'
 					+ '<span class="buy_in_style">买入</span>';
@@ -143,7 +148,7 @@ $(document).ready(()=>{
 					"用户ID："+user_id+"<br>"+
 					"用户名："+username+"<br>"+
 					"姓名："+name+"<br>"+
-					"资金数量："+money);
+					"资金数量："+money.toFixed(2));
 			$("#stock_holding").html("");
 			hold_stocks.forEach(
 					(element, index, array)=>{
@@ -152,10 +157,10 @@ $(document).ready(()=>{
 								'<li class="list-group-item">' +
 								stock_to_code(element.stock_id)+" "+ element.stock_name +
 								' 数量:' + element.amount +
-								' 买入价格:' + element.buyin_price + 
-								' 成本' + element.amount * element.buyin_price +
-								' 现价:' + element.current_price + 
-								' 损益:' + (element.current_price - element.buyin_price) * element.amount +
+								' 买入价格:' + element.buyin_price.toFixed(4) + 
+								' 成本' + element.amount * element.buyin_price.toFixed(2) +
+								' 现价:' + element.current_price.toFixed(4) + 
+								' 损益:' + ((element.current_price - element.buyin_price) * element.amount).toFixed(2) +
 								'</li>');
 						}
 					}
